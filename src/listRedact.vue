@@ -81,10 +81,9 @@ export default {
       this.tasks= JSON.parse( JSON.stringify( this.listItem.tips ) );
     },
     askSetTip(){
-      this.setTips()
+      this.$refs.modal.setVisibility(()=>{ this.setTips()},'Отменить все изменения?');
 
       //для многократной отмены действия
-
     /*  if(this.hashBoofer.length>1){
         let load =this.hashBoofer[this.hashBoofer.length-2];
         console.log(load);
