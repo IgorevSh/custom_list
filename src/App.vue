@@ -3,31 +3,32 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 export default {
-  name: 'App',
-  methods:{
-    ...mapActions(['fetchList'])
+  name: "App",
+  methods: {
+    ...mapActions(["fetchList"]),
   },
   mounted() {
     this.fetchList();
-  }
-}
+  },
+};
 </script>
 
 <style>
-*{
+* {
   padding: 0;
   margin: 0;
 }
-button,input[type=checkbox]{
+button,
+input[type="checkbox"] {
   cursor: pointer;
 }
-body{
+body {
   background-color: purple;
 }
-ul{
+ul {
   list-style: none;
 }
 #app {

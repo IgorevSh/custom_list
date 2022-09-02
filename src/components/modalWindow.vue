@@ -1,9 +1,10 @@
 <template>
-  <div :class="{not_visible:isVisible,layout:true}">
+  <div :class="{ not_visible: isVisible, layout: true }">
     <div class="modal_body">
-      <h3>{{question}}</h3>
+      <h3>{{ question }}</h3>
       <div class="button_wrapper">
-    <button class="yes_button" @click="acception()">Да</button><button class="no_button" @click="decline()">Нет</button>
+        <button class="yes_button" @click="acception()">Да</button
+        ><button class="no_button" @click="decline()">Нет</button>
       </div>
     </div>
   </div>
@@ -12,43 +13,43 @@
 <script>
 export default {
   name: "modalWindow",
-  data(){
-    return{
-      isVisible:true,
-      mainEvent:null,
-      question:'',
-    }
+  data() {
+    return {
+      isVisible: true,
+      mainEvent: null,
+      question: "",
+    };
   },
-  methods:{
-    acception(){
-      this.isVisible=true;
+  methods: {
+    acception() {
+      this.isVisible = true;
       this.mainEvent();
     },
-    decline(){
-      this.isVisible=true;
+    decline() {
+      this.isVisible = true;
     },
-    setVisibility(func,title='Вы уверены?'){
-      this.isVisible=false;
-      this.mainEvent=func;
-      this.question=title;
-    }
-  }
-}
+    setVisibility(func, title = "Вы уверены?") {
+      this.isVisible = false;
+      this.mainEvent = func;
+      this.question = title;
+    },
+  },
+};
 </script>
 
 <style scoped>
-.not_visible{
-display: none;
+.not_visible {
+  display: none;
 }
-.layout{
+.layout {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  top:0;
+  top: 0;
   z-index: 10000;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
-.modal_body{
+.modal_body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -63,31 +64,30 @@ display: none;
   width: 200px;
   height: 100px;
 }
-.modal_body h3{
+.modal_body h3 {
   margin: 15px 0;
 }
-button{
+button {
   padding: 0;
   width: 35%;
-  border-radius:15px;
+  border-radius: 15px;
   height: 25px;
-  border: none ;
+  border: none;
 }
-.button_wrapper{
+.button_wrapper {
   display: flex;
   justify-content: space-between;
 }
-.yes_button{
+.yes_button {
   background-color: purple;
-  color:white;
+  color: white;
   font-size: 14px;
   font-weight: 600;
 }
-.no_button{
-  color:white;
+.no_button {
+  color: white;
   background-color: purple;
   font-size: 14px;
   font-weight: 600;
 }
-
 </style>
