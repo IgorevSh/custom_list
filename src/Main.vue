@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="header_wrapper">
       <h1>ToDo List</h1>
       <button class="create_button" @click="createNewListItem()">
         Добавить заметки
@@ -81,5 +81,10 @@ h1 {
   background-color: white;
   font-weight: 500;
   font-size: 14px;
+}
+.header_wrapper {
+  background-color: purple;
+  position: sticky;
+  top: 0;
 }
 </style>
