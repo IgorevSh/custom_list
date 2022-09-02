@@ -81,6 +81,5 @@ h1 {
   background-color: white;
   font-weight: 500;
   font-size: 14px;
-  /*width: 120px;*/
 }
 </style>

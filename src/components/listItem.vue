@@ -45,11 +45,6 @@ export default {
     redactItem(id) {
       this.$router.push(`/${id}`);
     },
-    /*deleteItem(id){
-     // this.modal.setVisibility(this.deleteElement(id));
-      this.$emit('deleteItem',id);
-      //this.deleteElement(id);
-    }*/
   },
 };
 </script>

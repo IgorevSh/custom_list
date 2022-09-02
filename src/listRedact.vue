@@ -5,6 +5,7 @@
       class="text_field header_field"
       v-model="title"
       placeholder="Введите заголовок"
+      @input="saveStateDelay"
     />
     <div class="button_menu">
       <button @click="addTask">Добавить</button>
@@ -50,9 +51,10 @@ export default {
   data() {
     return {
       title: "",
+      timeVal: null,
       tasks: [],
       listItem: {},
-      hashBoofer: [],
+      hashBuffer: [],
     };
   },
   computed: {
@@ -61,25 +63,14 @@ export default {
   mounted() {
     this.setTips();
   },
-  /*watch:{
-    tasks:{
-      handler(){
-        this.saveState()
+  watch: {
+    tasks: {
+      handler() {
+        this.saveState();
       },
-      deep:true
+      deep: true,
     },
-    title:{
-      handler(){
-        this.saveState()
-      },
-    },
-    hashBoofer:{
-      handler(val){
-       console.log(val);
-      },
-      deep:true
-    },
-  },*/
+  },
   methods: {
     ...mapActions([
       "addElement",
@@ -91,12 +82,15 @@ export default {
       this.tasks.push({ name: "Новая запись", checked: false });
     },
     saveState() {
-      this.hashBoofer.push(
+      this.hashBuffer.push(
         JSON.stringify({ title: this.title, tasks: this.tasks })
       );
     },
-    setCheckbox(e, i) {
-      console.log(e, i);
+    saveStateDelay() {
+      clearTimeout(this.timeVal);
+      this.timeVal = setTimeout(() => {
+        this.saveState();
+      }, 500);
     },
     setTips() {
       Object.assign(this.listItem, this.getItemById(this.$route.params.id));
@@ -104,17 +98,18 @@ export default {
       this.tasks = JSON.parse(JSON.stringify(this.listItem.tips));
     },
     askSetTip() {
+      //Для полной отмены изменения
       this.$refs.modal.setVisibility(() => {
         this.setTips();
       }, "Отменить все изменения?");
 
-      //для многократной отмены действия
-      /*  if(this.hashBoofer.length>1){
-        let load =this.hashBoofer[this.hashBoofer.length-2];
-        console.log(load);
-        this.title=load.title;
-        this.tasks=JSON.parse( JSON.stringify( load.tasks ) );
-        this.hashBoofer=this.hashBoofer.splice( this.hashBoofer.length-3,1);
+      //для многократной отмены действия и возврат предыдущего действия
+      /* if (this.hashBuffer.length > 0) {
+        let load = JSON.parse(this.hashBuffer[this.hashBuffer.length - 2]);
+        this.title = load.title;
+        this.tasks = load.tasks;
+        this.hashBuffer = this.hashBuffer.splice(this.hashBuffer.length - 2, 3);
+        console.log(this.hashBuffer);
       }*/
     },
     saveTodo() {
